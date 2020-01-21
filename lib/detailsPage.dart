@@ -22,7 +22,7 @@ class _PageState extends State<DetailsPage> {
             child: new Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Text("TO BE DONE"),
+                Text("TO BE DONE"),  //TODO
               ],
             )
           ),
