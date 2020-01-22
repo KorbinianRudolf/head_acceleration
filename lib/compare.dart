@@ -60,6 +60,14 @@ class Compare {
     return out;
   }
 
+
+  static add(Compare comp) async {
+    List<Compare> list = await read();
+    list.add(comp);
+    save(list);
+  }
+
+
   static bool tryAll(List<int> accs) {
     bool out = false;
     Compare.read().then((vals) {
