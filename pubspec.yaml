@@ -26,6 +26,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   esense_flutter: ^0.2.0+2
   flutter_blue: ^0.6.3+1
+  shared_preferences: ^0.5.6
   #url_launcher: ^5.4.1
 
 dev_dependencies:

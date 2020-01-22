@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:head_acceleration/colorCalculator.dart';
 import 'package:head_acceleration/detailsPage.dart';
 
+
 class InfoPage extends StatefulWidget {
   @override
   _PageState createState() => _PageState();
@@ -53,14 +54,14 @@ class _PageState extends State<InfoPage> {
             new Column(
               children: <Widget>[
                 new Text("Gelb:", style: new TextStyle(color: ColorCalculator.MEDIUM)),
-                new Text("Aushaltbar, bzw. Beschleunigung erkannt und Verbindung hergestellt",
+                new Text("Aushaltbar, bzw. Beschleunigung erkannt",
                     style: new TextStyle(color: Colors.white)),
               ],
             ),
               new Column(
                 children: <Widget>[
                   new Text("Rot:", style: new TextStyle(color: ColorCalculator.DANGER)),
-                  new Text("Gefahr! So bald wie möglich beschleunigung verringern",
+                  new Text("Gefahr! So bald wie möglich Beschleunigung verringern",
                       style: new TextStyle(color: Colors.white)),
                 ],
               ),

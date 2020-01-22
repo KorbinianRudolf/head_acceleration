@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:head_acceleration/compare.dart';
 
 class ColorCalculator {
   ColorCalculator();
@@ -38,6 +39,8 @@ class ColorCalculator {
       return MEDIUM;
     } else if (accX <= G && accY <= G && accZ <= G) {
       return NO_DANGER;
+    } else if(Compare.tryAll([accX,accY,accZ])) {
+      return DANGER;
     }
     return NO_DANGER;
   }
@@ -52,6 +55,7 @@ class ColorCalculator {
     } else {
       return false;
     }
+
   }
 
   bool _isMedium(x, y, z) {
