@@ -4,6 +4,7 @@ import 'package:head_acceleration/infoPage.dart';
 import 'package:esense_flutter/esense.dart';
 import 'dart:async';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:head_acceleration/addConstraint.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -214,6 +215,18 @@ class _PageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         backgroundColor: curCo,
+        appBar: AppBar(
+          automaticallyImplyLeading: true,
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ConstraintsPage()),
+                );
+              },),
+          ],
+        ),
         body: new Center(
             child: new Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

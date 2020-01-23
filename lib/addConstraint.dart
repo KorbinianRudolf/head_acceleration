@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:head_acceleration/compare.dart';
+import 'package:head_acceleration/newCompare.dart';
 
 
 class ConstraintsPage extends StatefulWidget {
@@ -43,7 +44,12 @@ class _PageState extends State<ConstraintsPage> {
           actions: <Widget>[
 
             IconButton(icon: Icon(Icons.add),
-              onPressed: () => null,), //Todo
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NewComparePage()),
+                );
+              },),
 
             IconButton(icon: Icon(Icons.refresh),
               onPressed: _refresh,),

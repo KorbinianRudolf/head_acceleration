@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:head_acceleration/colorCalculator.dart';
 import 'package:head_acceleration/compare.dart';
 
-class newComparePage extends StatefulWidget {
+class NewComparePage extends StatefulWidget {
   @override
   _PageState createState() => _PageState();
 }
 
-class _PageState extends State<newComparePage> {
+class _PageState extends State<NewComparePage> {
   TextStyle _white = new TextStyle(color: Colors.white);
 
   SnackBar _fail;
