@@ -22,17 +22,16 @@ class _PageState extends State<NewComparePage> {
   String _dir = "";
 
   bool _validate(val, String dir) {
-    String dirLow = dir.toLowerCase();
-
+    print(dir);
+    bool ret = true;
     if (val == null || val <= 1) {
       _fail = _wrongValue;
-      return false;
-    } else if (dirLow != 'x' || dirLow != 'y' || dirLow != 'z') {
+      ret = false;
+    } else if (_dir != 'x' && _dir != 'y' && _dir != 'z') {
       _fail = _wrongDir;
-      return false;
-    } else {
-      return true;
+      ret = false;
     }
+    return ret;
   }
 
   @override
@@ -47,40 +46,49 @@ class _PageState extends State<NewComparePage> {
           onPressed: () => Navigator.pop(context, false),
         ),
       ),
-      body: new Center(
-        child: new Column(
-          children: <Widget>[
-            new Text(
-              "Beschleunigung 'a' als Faktor für 'a*${ColorCalculator.G}'",
-              style: _white,
-            ),
-            new Text(
-              "Richtung als x, y oder z Richung angeben",
-              style: _white,
-            ),
-            TextField(
-              keyboardType: TextInputType.number,
-              onChanged: (input) {
-                _value = int.parse(input);
-              },
-            ),
-            TextField(
-              onChanged: (input) {
-                _dir = input;
-              },
-            ),
-            RaisedButton(
-              child: new Text("Bestätigen",
-                  style: new TextStyle(color: Colors.white)),
-              onPressed: () {
-                if (_validate(_value, _dir)) {
-                  Compare.add(new Compare(_value, _dir));
-                } else {
-                  Scaffold.of(context).showSnackBar(_fail);
-                }
-              },
-            )
-          ],
+      body: Builder(
+        builder: (ctx) => new Center(
+          child: new Column(
+            children: <Widget>[
+              new Text(
+                "Beschleunigung 'a' als Faktor für 'a*${ColorCalculator.G}'",
+                style: _white,
+              ),
+              new Text(
+                "Richtung als x, y oder z Richung angeben",
+                style: _white,
+              ),
+              TextField(
+                cursorColor: Colors.white,
+                style: _white,
+                keyboardType: TextInputType.number,
+                onChanged: (input) {
+                  _value = int.parse(input);
+                },
+              ),
+              TextField(
+                cursorColor: Colors.white,
+                style: _white,
+                onChanged: (input) {
+                  _dir = input.toLowerCase();
+                },
+              ),
+              RaisedButton(
+                color: Colors.black12,
+                child: new Text("Bestätigen",
+                    style: new TextStyle(color: Colors.white)),
+                onPressed: () {
+                  if (_validate(_value, _dir)) {
+                    Compare.add(new Compare(_value, _dir));
+                    Navigator.pop(context, false);
+                  } else {
+                    print("fail");
+                    Scaffold.of(ctx).showSnackBar(_fail);
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -6,7 +6,6 @@ class Compare {
   int _dir;
   String _direction;
 
-
   ///maxVal: The value, that maxVal*G is the maximal acceleration
   ///dir: the direction, that is looked at
   Compare(int maxVal, String dir) {
@@ -16,50 +15,68 @@ class Compare {
       _dir = 0;
     } else if (dir == 'y') {
       _dir = 1;
-    } else if(dir == 'z') {
+    } else if (dir == 'z') {
       _dir = 2;
     }
   }
 
   /// val: the list of the x,y and z value
   bool eval(List<int> val) {
-    return (val[_dir] > _maxVal*ColorCalculator.G);
+    return (val[_dir] > _maxVal * ColorCalculator.G);
   }
 
   @override
   String toString() {
-    return _dir.toString() + "," + _maxVal.toString();
+    return direction + ";" + _maxVal.toString();
   }
 
   int get dir => _dir;
+
   int get maxVal => _maxVal;
+
   String get direction => _direction;
 
   static save(List<Compare> cons) async {
     final prefs = await SharedPreferences.getInstance();
     int i = 0;
     cons.forEach((el) {
-      final key = i.toString();
+      String key = "k" + i.toString();
       final value = cons.toString();
       prefs.setString(key, value);
       print('saved $value');
+      i++;
     });
+  }
+
+  static clearAll() async {
+    final prefs = await SharedPreferences.getInstance();
+    final keys = prefs.getKeys();
+    for (var value in keys) {
+      prefs.remove(value);
+    }
   }
 
   static Future<List<Compare>> read() async {
     final prefs = await SharedPreferences.getInstance();
     final keys = prefs.getKeys();
     List<Compare> out = [];
-    keys.forEach((key) {
-        String val = prefs.get(key) ?? "";
-        if(val != "") {
-          var vals = val.split(",");
-          out.add(new Compare(int.parse(vals[1]), val[0]));
-        }
-    });
+
+    var key = keys.elementAt(0);
+
+    String val = prefs.getString(key) ?? "";
+
+    if (val != "") {
+      var vals = val.replaceAll("[", "").replaceAll("]", "");
+      var allValues = vals.split(",");
+
+      allValues.forEach((v) {
+        var vals2 = v.split(";");
+        out.add(new Compare(int.parse(vals2[1]), vals2[0]));
+      });
+    }
+
     return out;
   }
-
 
   static add(Compare comp) async {
     List<Compare> list = await read();
@@ -67,17 +84,31 @@ class Compare {
     save(list);
   }
 
-
   static bool tryAll(List<int> accs) {
     bool out = false;
     Compare.read().then((vals) {
       vals.forEach((val) {
         out = out || val.eval(accs);
       });
-
     });
     return out;
   }
 
+
+  ///equals operation
+  bool eq(Compare el) {
+    return this._dir == el._dir && this._maxVal == el._maxVal;
+  }
+
+  static Future<bool> delete(Compare old) async {
+    List<Compare> comps = await read();
+    bool found = false;
+    comps.forEach((el) {
+      if(old.eq(el)) {
+        found = comps.remove(el);
+      }
+    });
+    return found;
+  }
 
 }
