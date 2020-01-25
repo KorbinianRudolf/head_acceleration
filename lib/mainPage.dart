@@ -217,6 +217,14 @@ class _PageState extends State<MainPage> {
         backgroundColor: curCo,
         appBar: AppBar(
           automaticallyImplyLeading: true,
+          leading: new IconButton(
+            icon: Icon(Icons.info_outline),
+              color: Colors.white,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => InfoPage()));
+              },
+          ),
           actions: <Widget>[
             IconButton(icon: Icon(Icons.add),
               onPressed: () {
@@ -246,14 +254,6 @@ class _PageState extends State<MainPage> {
                 textColor: Colors.white,
 
               ), */
-              new RaisedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => InfoPage()));
-                  },
-                  child: new Text("Info"),
-                  color: Colors.black26,
-                  textColor: Colors.white),
               new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[

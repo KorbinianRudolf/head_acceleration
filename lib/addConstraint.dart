@@ -46,7 +46,9 @@ class _PageState extends State<ConstraintsPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => NewComparePage()),
-                );
+                ).then((val) {
+                  _refresh();
+                });
               },
             ),
             IconButton(
@@ -55,7 +57,9 @@ class _PageState extends State<ConstraintsPage> {
             ),
             IconButton(
               icon: Icon(Icons.clear),
-              onPressed: () => Compare.clearAll(),
+              onPressed: () {
+                Compare.clearAll();
+                _refresh();},
             )
           ],
         ),
