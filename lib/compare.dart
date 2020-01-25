@@ -61,6 +61,9 @@ class Compare {
     final keys = prefs.getKeys();
     List<Compare> out = [];
 
+    if(keys.isEmpty) {
+      return out;
+    }
     var key = keys.elementAt(0);
 
     String val = prefs.getString(key) ?? "";
@@ -102,12 +105,24 @@ class Compare {
 
   static Future<bool> delete(Compare old) async {
     List<Compare> comps = await read();
+    if(comps.length == 1) {
+      clearAll();
+      return true;        //solution to the problem, that the last element doesn't want to be deleted
+    }
     bool found = false;
+    Compare toDelete = null;
     comps.forEach((el) {
       if(old.eq(el)) {
-        found = comps.remove(el);
+        toDelete = el;
       }
     });
+
+    if(toDelete != null) {
+      found = comps.remove(toDelete);
+    }
+    print(toDelete);
+    print(found);
+    save(comps);
     return found;
   }
 

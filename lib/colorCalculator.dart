@@ -33,14 +33,14 @@ class ColorCalculator {
 
   //select color depending on the total acceleration of the device hence of the head
   Color calc(accX, accY, accZ, sampling) {
-    if (_isDanger(accX, accY, accZ)) {
+    if(Compare.tryAll([accX,accY,accZ])) {
+      return DANGER;
+    } else if (_isDanger(accX, accY, accZ)) {
       return DANGER;
     } else if (_isMedium(accX, accY, accZ)) {
       return MEDIUM;
     } else if (accX <= G && accY <= G && accZ <= G) {
       return NO_DANGER;
-    } else if(Compare.tryAll([accX,accY,accZ])) {
-      return DANGER;
     }
     return NO_DANGER;
   }
