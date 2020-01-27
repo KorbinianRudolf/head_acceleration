@@ -9,21 +9,21 @@ class ConstraintsPage extends StatefulWidget {
 
 class _PageState extends State<ConstraintsPage> {
   List<Compare> _comps = [];
+  bool _empty = true;
+  TextStyle _white = new TextStyle(color: Colors.white);
+
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      Compare.read().then((vals) {
-        _comps = vals;
-      });
-    });
+    _refresh();
   }
 
   _refresh() {
     setState(() {
       Compare.read().then((vals) {
         _comps = vals;
+        _empty = (_comps.length == 0);
       });
     });
   }
@@ -34,7 +34,7 @@ class _PageState extends State<ConstraintsPage> {
         backgroundColor: Colors.indigo,
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          title: Text('weitere Gefahrenstufen'),
+          title: Text('Personalisieren'),
           leading: IconButton(
             icon: Icon(Icons.chevron_left),
             onPressed: () => Navigator.pop(context, false),
@@ -65,7 +65,9 @@ class _PageState extends State<ConstraintsPage> {
         ),
         body: new Center(
             child: new Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            _empty ? new Text("--Keine Elemente vorhanden--", style: _white) : null,      //Todo check!
             Container(
                 height: 300.0,
                 width: 300.0,
