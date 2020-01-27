@@ -30,7 +30,7 @@ class _PageState extends State<InfoPage> {
                       style: new TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold)),
                   new Text(
-                      "Der menschliche Körper hält nur bestimmte Beschleunigungen aus, auch in Abhängigkeit der Orientierung des Körpers",
+                      "Abhängig von der Positionierung eines menschlichen Körpers, kann dieser nur Beschleunigungen bis zu einem bestimmten Grad aushalten!",
                       style: new TextStyle(color: Colors.white)),
                 ],
               ),
