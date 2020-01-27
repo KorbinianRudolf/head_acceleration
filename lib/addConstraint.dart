@@ -12,11 +12,20 @@ class _PageState extends State<ConstraintsPage> {
   bool _empty = true;
   TextStyle _white = new TextStyle(color: Colors.white);
 
-
   @override
   void initState() {
     super.initState();
-    _refresh();
+
+    Future.delayed(const Duration(milliseconds: 1), () {    //if not added, the list is loaded, before the scaffold is build and it does not show the content
+      setState(() {
+        Compare.read().then((vals) {
+          _comps = vals;
+          _empty = (_comps.length == 0);
+        });
+      });
+    });
+
+
   }
 
   _refresh() {
@@ -30,6 +39,7 @@ class _PageState extends State<ConstraintsPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return new Scaffold(
         backgroundColor: Colors.indigo,
         appBar: AppBar(
@@ -59,15 +69,17 @@ class _PageState extends State<ConstraintsPage> {
               icon: Icon(Icons.clear),
               onPressed: () {
                 Compare.clearAll();
-                _refresh();},
+                _refresh();
+              },
             )
           ],
         ),
         body: new Center(
             child: new Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            _empty ? new Text("--Keine Elemente vorhanden--", style: _white) : null,      //Todo check!
+            _empty
+                ? new Text("--Keine Elemente vorhanden--", style: _white)
+                : SizedBox.shrink(),
             Container(
                 height: 300.0,
                 width: 300.0,
@@ -80,7 +92,7 @@ class _PageState extends State<ConstraintsPage> {
                         color: Colors.indigo[400],
                         child: Center(
                             child: new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             new Column(
                               children: <Widget>[
