@@ -16,7 +16,7 @@ class _PageState extends State<ConstraintsPage> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(milliseconds: 1), () {    //if not added, the list is loaded, before the scaffold is build and it does not show the content
+    Future.delayed(const Duration(milliseconds: 50), () {    //if not added, the list is loaded, before the scaffold is build and it does not show the content
       setState(() {
         Compare.read().then((vals) {
           _comps = vals;
