@@ -49,6 +49,7 @@ class _PageState extends State<NewComparePage> {
       body: Builder(
         builder: (ctx) => new Center(
           child: new Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               new Text(
                 "Beschleunigung 'a' als Faktor für 'a*${ColorCalculator.G}'",
@@ -59,6 +60,18 @@ class _PageState extends State<NewComparePage> {
                 style: _white,
               ),
               TextField(
+                decoration: new InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.indigoAccent,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  hintText: "Beschleunigung",
+                  hintStyle: new TextStyle(color: Colors.grey),
+                ),
+                textAlign: TextAlign.center,
+                maxLength: 3,
                 cursorColor: Colors.white,
                 style: _white,
                 keyboardType: TextInputType.number,
@@ -67,6 +80,19 @@ class _PageState extends State<NewComparePage> {
                 },
               ),
               TextField(
+                decoration: new InputDecoration(
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.indigoAccent,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  hintText: "Richtung",
+                  hintStyle: new TextStyle(color: Colors.grey),
+
+                ),
+                textAlign: TextAlign.center,
+                maxLength: 1,
                 cursorColor: Colors.white,
                 style: _white,
                 onChanged: (input) {

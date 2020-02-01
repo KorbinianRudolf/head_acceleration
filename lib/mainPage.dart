@@ -228,7 +228,7 @@ class _PageState extends State<MainPage> {
               },
           ),
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.add),
+            IconButton(icon: Icon(Icons.settings),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -242,7 +242,7 @@ class _PageState extends State<MainPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
               new Text(
-                  "Maximal Gemessene Beschleunigung: ${(_maxAcc.abs() / 1000).round()} m/s$_powOTwo",
+                  "Maximal gemessene Beschleunigung: ${(_maxAcc.abs() / 1000).round()} m/s$_powOTwo",
                   style: new TextStyle(color: Colors.white)),
               new Text(
                   (_blueOn)
@@ -259,9 +259,6 @@ class _PageState extends State<MainPage> {
               new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    RaisedButton(
-                      onPressed:() => setState(() => _maxAcc = 0),
-                    ),
                     RaisedButton(
                       color: Colors.black26,
                       child: new Text('Neu verbinden',
