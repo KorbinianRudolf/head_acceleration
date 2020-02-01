@@ -32,8 +32,9 @@ class ColorCalculator {
   }
 
   //select color depending on the total acceleration of the device hence of the head
-  Color calc(accX, accY, accZ, sampling) {
-    if(Compare.tryAll([accX,accY,accZ])) {
+  Future<Color> calc(accX, accY, accZ, sampling) async{
+    bool dg = await Compare.tryAll([accX,accY,accZ]);
+    if(dg) {
       return DANGER;
     } else if (_isDanger(accX, accY, accZ)) {
       return DANGER;

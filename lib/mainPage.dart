@@ -184,7 +184,9 @@ class _PageState extends State<MainPage> {
       if (!ESenseManager.connected) {
         curCo = ColorCalculator.NO_VALUE;
       } else {
-        curCo = cc.calc(_accX, _accY, _accZ, sampling);
+        cc.calc(_accX, _accY, _accZ, sampling).then((val) {
+          curCo = val;
+        });
       }
     });
   }
@@ -257,6 +259,9 @@ class _PageState extends State<MainPage> {
               new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
+                    RaisedButton(
+                      onPressed:() => setState(() => _maxAcc = 0),
+                    ),
                     RaisedButton(
                       color: Colors.black26,
                       child: new Text('Neu verbinden',

@@ -22,7 +22,9 @@ class Compare {
 
   /// val: the list of the x,y and z value
   bool eval(List<int> val) {
-    return (val[_dir] > _maxVal * ColorCalculator.G);
+    bool out = (val[_dir] > this._maxVal * ColorCalculator.G);
+    print("eval $out");
+    return out;
   }
 
   @override
@@ -87,13 +89,19 @@ class Compare {
     save(list);
   }
 
-  static bool tryAll(List<int> accs) {
+
+  static Future<bool> tryAll(List<int> accs) async {
     bool out = false;
-    Compare.read().then((vals) {
+    var vals = await read();
       vals.forEach((val) {
-        out = out || val.eval(accs);
+        bool va = val.eval(accs);
+        print(va);
+        if(va) {
+          out = true;
+        }
       });
-    });
+
+    print("try $out");
     return out;
   }
 
