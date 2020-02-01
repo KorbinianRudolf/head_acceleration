@@ -218,6 +218,7 @@ class _PageState extends State<MainPage> {
     return new Scaffold(
         backgroundColor: curCo,
         appBar: AppBar(
+          title: new Text("Gefahrenampel"),
           automaticallyImplyLeading: true,
           leading: new IconButton(
             icon: Icon(Icons.info_outline),
