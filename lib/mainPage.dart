@@ -41,7 +41,7 @@ class _PageState extends State<MainPage> {
   int _accZ = 0;
   int _maxAcc = 0;
 
-  String eSenseName = 'eSense-0362'; //TODO change
+  String eSenseName = 'eSense-0362';
 
   @override
   void initState() {
