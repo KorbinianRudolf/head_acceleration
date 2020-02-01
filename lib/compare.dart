@@ -23,7 +23,6 @@ class Compare {
   /// val: the list of the x,y and z value
   bool eval(List<int> val) {
     bool out = (val[_dir] > this._maxVal * ColorCalculator.G);
-    print("eval $out");
     return out;
   }
 
@@ -101,7 +100,6 @@ class Compare {
         }
       });
 
-    print("try $out");
     return out;
   }
 
