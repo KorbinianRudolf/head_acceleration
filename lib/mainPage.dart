@@ -222,79 +222,83 @@ class _PageState extends State<MainPage> {
           automaticallyImplyLeading: true,
           leading: new IconButton(
             icon: Icon(Icons.info_outline),
-              color: Colors.white,
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => InfoPage()));
-              },
+            color: Colors.white,
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => InfoPage()));
+            },
           ),
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.settings),
+            IconButton(
+              icon: Icon(Icons.settings),
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ConstraintsPage()),
                 );
-              },),
+              },
+            ),
           ],
         ),
-        body: new Center(
-            child: new Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-              new Text(
-                  "Maximal gemessene Beschleunigung: ${(_maxAcc.abs() / 1000).round()} m/s$_powOTwo",
-                  style: new TextStyle(color: Colors.white)),
-              new Text(
-                  (_blueOn)
-                      ? "Derzeitiger Status: ${_germanStatus(_deviceStatus)}"
-                      : "Bitte aktivieren Sie Bluetooth",
-                  style: new TextStyle(color: Colors.white)),
-              /*new RaisedButton(
+        body: Builder(
+            builder: (ctx) => new Center(
+                    child: new Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                      new Text(
+                          "Maximal gemessene Beschleunigung: ${(_maxAcc.abs() / 1000).round()} m/s$_powOTwo",
+                          style: new TextStyle(color: Colors.white)),
+                      new Text(
+                          (_blueOn)
+                              ? "Derzeitiger Status: ${_germanStatus(_deviceStatus)}"
+                              : "Bitte aktivieren Sie Bluetooth",
+                          style: new TextStyle(color: Colors.white)),
+                      /*new RaisedButton(
                 onPressed: () =>  _changeColor(0),
                 child: new Text("change"),
                 color: Colors.black26,
                 textColor: Colors.white,
 
               ), */
-              new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    RaisedButton(
-                      color: Colors.black26,
-                      child: new Text('Neu verbinden',
-                          style: new TextStyle(color: Colors.white)),
-                      onPressed: () {
-                        if (_blueOn) {
-                          if (!ESenseManager.connected) {
-                            _connectToESense();
-                          } else {
-                            final snackbar = _alreadyConnected;
-                            Scaffold.of(context).showSnackBar(snackbar);
-                          }
-                        } else {
-                          final snackbar = _activateBlue;
-                          Scaffold.of(context).showSnackBar(snackbar);
-                        }
-                      },
-                    ),
-                    RaisedButton(
-                      color: Colors.black26,
-                      onPressed: () {
-                        if (_blueOn && ESenseManager.connected) {
-                          (!sampling)
-                              ? _startListenToSensorEvents()
-                              : _pauseListenToSensorEvents();
-                        } else {
-                          final snackbar =
-                              (!_blueOn) ? _activateBlue : _connect;
-                          Scaffold.of(context).showSnackBar(snackbar);
-                        }
-                      },
-                      child: Icon((!sampling) ? Icons.play_arrow : Icons.pause,
-                          color: Colors.white),
-                    ),
-                  ]),
-            ])));
+                      new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            RaisedButton(
+                              color: Colors.black26,
+                              child: new Text('Neu verbinden',
+                                  style: new TextStyle(color: Colors.white)),
+                              onPressed: () {
+                                if (_blueOn) {
+                                  if (!ESenseManager.connected) {
+                                    _connectToESense();
+                                  } else {
+                                    final snackbar = _alreadyConnected;
+                                    Scaffold.of(ctx).showSnackBar(snackbar);
+                                  }
+                                } else {
+                                  final snackbar = _activateBlue;
+                                  Scaffold.of(ctx).showSnackBar(snackbar);
+                                }
+                              },
+                            ),
+                            RaisedButton(
+                              color: Colors.black26,
+                              onPressed: () {
+                                if (_blueOn && ESenseManager.connected) {
+                                  (!sampling)
+                                      ? _startListenToSensorEvents()
+                                      : _pauseListenToSensorEvents();
+                                } else {
+                                  final snackbar =
+                                      (!_blueOn) ? _activateBlue : _connect;
+                                  Scaffold.of(ctx).showSnackBar(snackbar);
+                                }
+                              },
+                              child: Icon(
+                                  (!sampling) ? Icons.play_arrow : Icons.pause,
+                                  color: Colors.white),
+                            ),
+                          ]),
+                    ]))));
   }
 }
