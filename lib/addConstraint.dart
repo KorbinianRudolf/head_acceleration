@@ -78,7 +78,7 @@ class _PageState extends State<ConstraintsPage> {
             child: new Column(
           children: <Widget>[
             _empty
-                ? new Text("--Keine Elemente vorhanden--", style: _white)
+                ? new Text("---Keine Elemente vorhanden---", style: _white)
                 : SizedBox.shrink(),
             Container(
                 height: 300.0,
