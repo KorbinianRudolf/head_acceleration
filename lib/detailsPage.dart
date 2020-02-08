@@ -35,7 +35,7 @@ class _PageState extends State<DetailsPage> {
             _newText(
                 "Die Beschleunigung wird in m/s\u00B2 angegeben, bzw als Faktor a, sodass a*G die Beschleunigung ergibt."),
             _newText(
-                "Dabei entspricht G der Erdbeschleunigung, oder ca. 10m/s\u00B2."),
+                "Dabei entspricht G der Erdbeschleunigung, ca. 10m/s\u00B2."),
             _newText(
                 "In X und Z Richtung hält der Körper das bis zu 20fache der Erdbeschleunigung aus, bevor es gefährlich wird."),
             _newText(

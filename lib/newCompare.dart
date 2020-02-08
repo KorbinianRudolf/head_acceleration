@@ -13,18 +13,18 @@ class _PageState extends State<NewComparePage> {
   SnackBar _fail;
 
   SnackBar _wrongValue = new SnackBar(
-      content: new Text("Die Beschleunigung muss eine Zahl größer 1 sein"));
+      content: new Text("Die Beschleunigung muss eine Zahl größer/gleich 1 sein"));
   SnackBar _wrongDir = new SnackBar(
       content: new Text(
-          "Die Richtung muss x,y oder z aus dem Standardkoordinatensystem entsprechen"));
+          "Es muss eine Richtung (x,y oder z) ausgewählt werden."));
 
-  int _value = 0;
+  int _value = 1;
   String _dir = "";
 
   bool _validate(val, String dir) {
     print(dir);
     bool ret = true;
-    if (val == null || val <= 1) {
+    if (val == null || val < 1) {
       _fail = _wrongValue;
       ret = false;
     } else if (_dir != 'x' && _dir != 'y' && _dir != 'z') {
@@ -56,10 +56,10 @@ class _PageState extends State<NewComparePage> {
                 style: _white,
               ),
               new Text(
-                "Richtung als x, y oder z Richung angeben",
+                "Richtung als x, y oder z (Standardkoordinatensystem) angeben",
                 style: _white,
               ),
-              TextField(
+              /*TextField(
                 decoration: new InputDecoration(
                   border: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -78,8 +78,28 @@ class _PageState extends State<NewComparePage> {
                 onChanged: (input) {
                   _value = int.parse(input);
                 },
+              ),*/
+              new Column(
+                children: <Widget>[
+                  Text("Beschleunigung (Aktuell: $_value)", style: _white,),
+                  Slider(
+                    activeColor: Colors.black,
+                    inactiveColor: Colors.black26,
+                    divisions: 19,
+                    min: 1,
+                    max: 20,
+                    value: _value.toDouble(),
+                    onChanged: (newVal) {
+                      setState(() {
+                        _value = newVal.round();
+                      });
+                    },
+                    label: "$_value G",
+                  )
+                ],
               ),
-              TextField(
+
+              /*    TextField(
                 decoration: new InputDecoration(
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -98,6 +118,48 @@ class _PageState extends State<NewComparePage> {
                 onChanged: (input) {
                   _dir = input.toLowerCase();
                 },
+              ),*/
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Column(children: <Widget>[
+                    Text("x", style: _white),
+                    Radio(
+                      value: "x",
+                      groupValue: _dir,
+                      onChanged: (val) {
+                        setState(() {
+                          _dir = val;
+                        });
+                      },
+                    )
+                  ]),
+                  Column(children: <Widget>[
+                    Text("y", style: _white),
+                    Radio(
+                      value: "y",
+                      groupValue: _dir,
+                      onChanged: (val) {
+                        setState(() {
+                          _dir = val;
+                        });
+
+                      },
+                    )
+                  ]),
+                  Column(children: <Widget>[
+                    Text("z", style: _white),
+                    Radio(
+                      value: "z",
+                      groupValue: _dir,
+                      onChanged: (val) {
+                        setState(() {
+                          _dir = val;
+                        });
+                      },
+                    )
+                  ]),
+                ],
               ),
               RaisedButton(
                 color: Colors.black12,
