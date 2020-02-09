@@ -41,6 +41,7 @@ class _PageState extends State<MainPage> {
   int _accZ = 0;
   int _maxAcc = 0;
   int _maxG = 0;
+  int _curAcc = 0;
 
   String eSenseName = 'eSense-0362';
 
@@ -158,8 +159,8 @@ class _PageState extends State<MainPage> {
           _maxAcc = _accZ;
         }
 
-        _maxG = (_maxAb/ColorCalculator.G).round();
-
+        _maxG = (_maxAb / ColorCalculator.G).round();
+        _curAcc = ColorCalculator.absAcc(_accX, _accY, _accY).round();
       });
     });
     setState(() {
@@ -249,9 +250,17 @@ class _PageState extends State<MainPage> {
                     child: new Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                      new Text(
-                          "Maximal gemessene Beschleunigung: ${(_maxAcc.abs() / 1000).round()} m/s$_powOTwo (ca. $_maxG G)",
-                          style: new TextStyle(color: Colors.white)),
+                      new Column(
+                        children: <Widget>[
+                          new Text(
+                            "Aktuelle absolute Beschleunigung: $_curAcc m/s$_powOTwo",
+                            style: new TextStyle(color: Colors.white),
+                          ),
+                          new Text(
+                              "Maximale Beschleunigung: ${(_maxAcc.abs() / 1000).round()} m/s$_powOTwo (ca. $_maxG G)",
+                              style: new TextStyle(color: Colors.white)),
+                        ],
+                      ),
                       new Text(
                           (_blueOn)
                               ? "Derzeitiger Status: ${_germanStatus(_deviceStatus)}"

@@ -81,7 +81,7 @@ class _PageState extends State<NewComparePage> {
               ),*/
               new Column(
                 children: <Widget>[
-                  Text("Beschleunigung (Aktuell: $_value)", style: _white,),
+                  Text("Beschleunigung (Aktuell: $_value G)", style: _white,),
                   Slider(
                     activeColor: Colors.black,
                     inactiveColor: Colors.black26,

@@ -60,10 +60,10 @@ class ColorCalculator {
   }
 
   bool _isMedium(x, y, z) {
-    return (x > G || y > G || z > G || _absAcc(x, y, z) > G);
+    return (x > G || y > G || z > G || absAcc(x, y, z) > G);
   }
 
-  double _absAcc(x, y, z) {
+  static double absAcc(x, y, z) {
     return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
   }
 }
