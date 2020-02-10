@@ -253,7 +253,15 @@ class _PageState extends State<MainPage> {
                       new Column(
                         children: <Widget>[
                           new Text(
-                            "Aktuelle absolute Beschleunigung: $_curAcc m/s$_powOTwo",
+                            "Aktuell x: ${(_accX.abs()/1000).round()} m/s$_powOTwo",
+                            style: new TextStyle(color: Colors.white),
+                          ),
+                          new Text(
+                            "Aktuell y: ${(_accY.abs()/1000).round()} m/s$_powOTwo",
+                            style: new TextStyle(color: Colors.white),
+                          ),
+                          new Text(
+                            "Aktuell z: ${(_accZ.abs()/1000).round()} m/s$_powOTwo",
                             style: new TextStyle(color: Colors.white),
                           ),
                           new Text(
